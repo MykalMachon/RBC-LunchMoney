@@ -21,7 +21,12 @@ try {
 }
 
 // get the API key
-const lmApiKey = await db.query('SELECT * FROM settings WHERE name = $setting').get({ $setting: 'lunchmoney_api_key' });
+type Setting = {
+  id: number;
+  name: string;
+  value: string;
+}
+const lmApiKey = await db.query('SELECT * FROM settings WHERE name = $setting').get({ $setting: 'lunchmoney_api_key' }) as Setting;
 
 // initialize services
 const lm = new LunchMoneyAPI(lmApiKey.value, db);
@@ -112,5 +117,5 @@ const insertResults = transactionsByAccount.map((t) => {
 })
 
 const results = await Promise.allSettled(insertResults);
-console.log('results were inserted succesfully. Please verify them in Lunch Money.')
+console.log('results were inserted successfully. Please verify them in Lunch Money.')
 console.log('https://my.lunchmoney.app/transactions/')
