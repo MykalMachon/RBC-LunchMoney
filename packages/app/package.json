@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "bun run ./src/index.ts",
-    "build": "rm -rf ./dist && mkdir ./dist && bun build ./src/index.ts --compile --outfile ./dist/rbclm"
+    "build": "rm -rf ./dist && mkdir ./dist && bun build ./src/index.ts --compile --minify --outfile ./dist/rbclm"
   },
   "type": "module",
   "dependencies": {
