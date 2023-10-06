@@ -1,0 +1,33 @@
+name: "🛠️ Build Binary Executable"
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/app
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v3
+
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: install deps
+        run: bun install
+
+      - name: build binary
+        run: bun run build 
+
+        # TODO: replace this with a maintained action. This one is abandonware.
+      - name: push binary to github
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./packages/app/dist/rbclm
+          asset_name: rbclm
+          asset_content_type: application/octet-stream
