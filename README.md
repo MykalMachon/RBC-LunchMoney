@@ -10,7 +10,7 @@ This tool takes Royal Bank of Canada account export CSVs, matches them to existi
 
 ## Getting Started
 
-If you want to use this tool to import RBC transactions into LunchMoney, and you're on a Mac/WSL/Linux box, you can [download the latest release from the releases page](/home/mykal/projects/mykalmachon/RBC-LunchMoney/README.md).
+If you want to use this tool to import RBC transactions into LunchMoney, and you're on a Mac/WSL/Linux box, you can [download the latest release from the releases page](https://github.com/MykalMachon/RBC-LunchMoney/releases).
 
 From there, just run the binary and it should take you through the process step-by-step.
 
