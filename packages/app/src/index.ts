@@ -1,5 +1,5 @@
 // import chalk from 'chalk';
-import { input, confirm, password, select } from '@inquirer/prompts';
+import { input, confirm, select } from '@inquirer/prompts';
 
 import { parse } from 'csv-parse';
 import { Database } from "bun:sqlite";
@@ -16,7 +16,7 @@ try {
   db.query('CREATE TABLE accounts (id INTEGER PRIMARY KEY, lm_id TEXT, rbc_name TEXT)').run();
   db.query('CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER  date TEXT, amount REAL, description TEXT, category TEXT, FOREIGN KEY(account_id) REFERENCES accounts(id))').run();
 
-  const newApiKey = await password({ message: 'Enter your Lunch Money API key:' })
+  const newApiKey = await input({ message: 'Enter your Lunch Money API key:' })
   db.query('INSERT INTO settings (name, value) VALUES (?, ?)').run('lunchmoney_api_key', newApiKey);
 }
 
@@ -61,7 +61,6 @@ const remainingLMAccounts = new Set(lmAccounts.assets);
 
 // match transactions
 let matches = await db.query('select * from accounts').all();
-console.log(matches);
 let rematch = true;
 if (matches.length > 0)
   rematch = await confirm({ message: 'We found some matches from a previous import. Do you want to rematch your accounts?' });
@@ -112,7 +111,6 @@ const transactionsByAccount = matches.map((am) => {
 // insert transactions into LunchMoney
 const insertResults = transactionsByAccount.map((t) => {
   console.log(`inserting ${t.transactions.length} transactions into Lunch Money account ${t.lmAccount}`)
-  console.log(t.transactions);
   return lm.insertTransactions(t.transactions);
 })
 

@@ -7,6 +7,10 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "scripts": {
+    "start": "bun run ./src/index.ts",
+    "build": "rm -rf ./dist && mkdir ./dist && bun build ./src/index.ts --compile --outfile ./dist/rbclm"
+  },
   "type": "module",
   "dependencies": {
     "@inquirer/prompts": "^3.2.0",
