@@ -22,3 +22,4 @@ If you have any issues, please feel free to [submit an issue](https://github.com
 ## Other documentation
 
 - [LunchMoney API](https://lunchmoney.dev/)
+- [RBC transaction export guide](https://www.rbcroyalbank.com/onlinebanking/bankingusertips/accountingsoftware/index.html)
