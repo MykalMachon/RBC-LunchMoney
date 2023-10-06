@@ -1,4 +1,4 @@
-name: "🛠️ Build Binary Executable"
+name: "🎁 Build For Release"
 on:
   release:
     types: [created]
