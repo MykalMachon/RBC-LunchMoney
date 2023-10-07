@@ -11,6 +11,7 @@ import setup from '@actions/setup';
 import confirmUser from '@actions/confirm-user';
 import loadAccounts from '@actions/load-accounts';
 import { matchAccounts } from '@actions/match-accounts';
+import confirmImport from '@actions/confirm-import';
 
 // setup the database
 const db = await setup();
@@ -30,7 +31,6 @@ const {lmAccounts, rbcAccounts} = await loadAccounts(rbc, lm);
 // match RBC accounts to LunchMoney accounts
 const matches = await matchAccounts(db, rbcAccounts, lmAccounts);
 
-
 const transactionsByAccount = matches.map((am) => {
   const accountMatch = am as Account;
   const transactions = rbc.getTransactions().filter((t) => t["Account Number"] === accountMatch.rbc_name);
@@ -48,12 +48,4 @@ const transactionsByAccount = matches.map((am) => {
   }
 })
 
-// insert transactions into LunchMoney
-const insertResults = transactionsByAccount.map((t) => {
-  console.log(`inserting ${t.transactions.length} transactions into Lunch Money account ${t.lmAccount}`)
-  return lm.insertTransactions(t.transactions);
-})
-
-const results = await Promise.allSettled(insertResults);
-console.log('results were inserted successfully. Please verify them in Lunch Money.')
-console.log('https://my.lunchmoney.app/transactions/')
+await confirmImport(lm, transactionsByAccount);
