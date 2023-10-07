@@ -1,7 +1,7 @@
 import Database from "bun:sqlite";
 import { parse } from "csv-parse";
 
-type RBCTransaction = {
+export type RBCTransaction = {
   "Account Type": string;
   "Account Number": string;
   "Transaction Date": string;
@@ -12,7 +12,7 @@ type RBCTransaction = {
   "USD$": string;
 }
 
-type RBCAccount = {
+export type RBCAccount = {
   "Account Type": string;
   "Account Number": string;
 }

@@ -21,6 +21,19 @@ export type LunchMoneyTransaction = {
   tags?: string[];
 }
 
+export type LunchMoneyAsset = {
+  id: number;
+  type_name: string;
+  subtype_name: string;
+  name: string;
+  display_name: string; 
+  balance: string;
+  balance_as_of: string;
+  currency: string;
+  institution_name: string;
+  created_at: string;
+}
+
 export class LunchMoneyAPI {
   apiKey: String;
   db: Database;
@@ -39,7 +52,7 @@ export class LunchMoneyAPI {
     return await res.json();
   }
 
-  async getAssets(): Promise<{assets: Record<string, string>[]}> {
+  async getAssets(): Promise<{assets: LunchMoneyAsset[]}> {
     const res = await fetch('https://dev.lunchmoney.app/v1/assets', {
       headers: {
         Authorization: `Bearer ${this.apiKey}`

@@ -15,6 +15,12 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+      "bun-types": ["../../types/index.d.ts"], // add Bun global
+      "@services/*": ["./src/services/*"],
+      "@actions/*": ["./src/actions/*"],
+    },
     "types": [
       "bun-types" // add Bun global
     ]
